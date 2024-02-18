@@ -1,0 +1,7 @@
+[package]
+name = "eharbinger"
+version = "0.0.1"
+entrypoint = "lib.typ"
+authors = ["Typst Community", "igidrau", "DVDTSB", "ntjess", "PgSuper"]
+license = "MIT"
+description = "A package for shadow boxes in Typst."
