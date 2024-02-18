@@ -1,2 +1,2 @@
-#import "/source/svg-shadow.typ": svg-shadow
-#import "/source/typst-shadow.typ": typst-shadow
+#import "/src/svg-shadow.typ": svg-shadow
+#import "/src/typst-shadow.typ": typst-shadow
