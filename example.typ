@@ -1,4 +1,4 @@
-#import "@local/harbinger:1.0.0": *
+#import "@preview/harbinger:1.0.0": *
 
 #shadow-box(
   radius: 5pt,
@@ -15,7 +15,7 @@
   fill:white,
   dx: 2pt,
   dy: 2pt,
-  blur:2pt,
+  blur:2,
   
 )[This is a fast shadow box]
 

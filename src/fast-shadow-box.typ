@@ -28,6 +28,7 @@
 ) = {
   let bwidth = if (type(width) == ratio) {100%} else {width}
   let bheight = if (type(height) == ratio) {100%} else {height}
+  blur = if(type(blur) == length) {blur} else {blur*1pt}
   let outset = parse-outset(outset)
   let shadow-outset = parse-outset(shadow-outset)
   let shadow-outset = (

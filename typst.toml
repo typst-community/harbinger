@@ -5,3 +5,13 @@ entrypoint = "lib.typ"
 authors = ["Typst Community", "igidrau", "DVDTSB", "ntjess", "PgSuper"]
 license = "MIT"
 description = "A package for shadow boxes in Typst."
+
+[tool.packager]
+paths = [
+    "README.md",
+    "LICENSE",
+    "src/",
+    "example.typ",
+    "lib.typ",
+    "example.pdf",
+]
