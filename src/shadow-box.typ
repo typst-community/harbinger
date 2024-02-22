@@ -47,8 +47,30 @@
   }
 }
 
+/// Shadow Box that uses svg filters to create the shadow effect.
+///
+/// *Example:*
+/// #example(`harbinger.shadow-box(
+///  radius: 5pt,
+///  inset:1em,
+///  fill:white,
+///  dx: 2pt,
+///  dy: 2pt,
+///  blur:2,
+/// )[This is a nice shadow box]
+/// `)
+/// - body (content): This is the content of the shadow box.
+/// - shadow-fill (color): The color of the shadow.
+/// -> content
+/// - opacity (number): The opacity of the shadow. 
+/// - dx (number): The horizontal offset of the shadow.
+/// - dy (number): The vertical offset of the shadow.
+/// - radius (number): The radius of the shadow.
+/// - blur (number): The blur of the shadow.
+/// - margin (number): The margin of the shadow.
+/// - ..args (dictionary): Additional arguments for the shadow box (width, height, fill, etc).
 #let shadow-box(
-  content,
+  body,
   shadow-fill: black,
   opacity: 0.5,
   dx: 0pt,
@@ -69,7 +91,7 @@
     let opts = (blur-x: blur.x, blur-y: blur.y, radius: radius)
     let shadow-fill = shadow-fill.rgb().components().map(el => el/100% * 255)
     opts.flood-color = strfmt("rgb({}, {}, {}, {})", ..shadow-fill)
-    let boxed-content = box(content, radius: radius, ..named)
+    let boxed-content = box(body, radius: radius, ..named)
     let rect-size = measure(boxed-content, styles)
     let (rect-x-offset, rect-y-offset) = (
       blur.x * margin, blur.y * margin

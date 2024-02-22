@@ -20,9 +20,29 @@
   }
 }
 
-#let shadow-block(
+/// Shadow Box that uses gradients to create the shadow effect.
+///
+/// *Example:*
+/// #example(`harbinger.fast-shadow-box(
+///  radius: 5pt,
+///  inset:1em,
+///  fill:white,
+///  dx: 2pt,
+///  dy: 2pt,
+///  blur:2,
+/// )[This is a nice shadow box]
+/// `)
+/// - body (content): This is the content of the shadow box.
+/// - shadow-fill (color): The color of the shadow.
+/// -> content
+/// - dx (number): The horizontal offset of the shadow.
+/// - dy (number): The vertical offset of the shadow.
+/// - radius (number): The radius of the shadow.
+/// - blur (number): The blur of the shadow.
+/// - ..args (dictionary): Additional arguments for the shadow box (width, height, fill, etc).
+#let fast-shadow-box(
   width: auto, height: auto, radius: 0pt, outset: 0pt,
-  blur: 1pt, dx: 10pt, dy: 10pt, shadow-color: rgb(0,0,0).lighten(0%),
+  blur: 1pt, dx: 10pt, dy: 10pt, shadow-fill: rgb(0,0,0).lighten(0%),
   shadow-outset: 0pt,
   ..args, body
 ) = {
@@ -37,12 +57,20 @@
       top: shadow-outset.top - dy+outset.top+blur,
       bottom: shadow-outset.bottom + dy+outset.bottom+blur,
     )
+  let named = args.named()
+    for key in ("width", "height") {
+      if key in named and type(named.at(key)) == ratio {
+        named.insert(key, size.at(key) * named.at(key))
+      }
+    }
+  let boxed-content = box(body, radius: radius, ..named)
+    
   block(
     radius: radius,
     width: width,
     height: height,
     outset: shadow-outset,
-    fill: if (blur == 0pt) {shadow-color} else {none},
+    fill: if (blur == 0pt) {shadow-fill} else {none},
     inset: 0pt,
     layout(size => style(st => {
       let bwidth = if (type(width) == ratio) {size.width} else {width}
@@ -58,7 +86,7 @@
         let bwidth = bsize.width - 2*radius + shadow-outset.left + shadow-outset.right
         let bheight = bsize.height - 2*radius + shadow-outset.top + shadow-outset.bottom 
 
-        let grad = (shadow-color, rgb(255,255,255))
+        let grad = (shadow-fill, rgb(255,255,255))
         let corn-grad = gradient.radial.with(..grad, radius: 100%, space:oklch)
         
         place(top+left, dx: -shadow-outset.left, dy: -shadow-outset.top,
@@ -88,14 +116,12 @@
             fill: gradient.linear(dir: rtl, ..grad, space:oklch)))
         
         place(horizon+center, dx: dx, dy: dy,
-          rect(width: bwidth, height: bheight, fill: shadow-color))
+          rect(width: bwidth, height: bheight, fill: shadow-fill))
         place(horizon+center, dx: dx, dy: dy,
-          rect(width: bwidth, height: bheight, fill: shadow-color))
+          rect(width: bwidth, height: bheight, fill: shadow-fill))
       }
-      (body)
+      (boxed-content)
     }))
   )
 }
 
-
-#let fast-shadow-box(..args) = box(shadow-block(..args))
