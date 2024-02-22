@@ -47,7 +47,7 @@
   }
 }
 
-#let svg-shadow(
+#let shadow-box(
   content,
   shadow-fill: black,
   opacity: 0.5,
