@@ -11,7 +11,6 @@
 
 #show terms.item: it => [- #par(hanging-indent: 1em)[*#it.term:*  #it.description]]
 
-#set heading(numbering: "1.1.")
 
 #show heading: it => [
   #if it.level==1 and it.numbering!=none {
@@ -25,17 +24,7 @@
 
 ]
 
-#outline(depth: 3, indent:1em )
+#let docs = tidy.parse-module((read("src/shadow-box.typ"),read("src/fast-shadow-box.typ")).join(), scope: (harbinger:harbinger), name: "functions")
 
-= Docs
+#tidy.show-module(docs, show-outline:false, )
 
-#let docs = tidy.parse-module(read("src/shadow-box.typ"), scope: (harbinger:harbinger), name: "shadow-box")
-
-#tidy.show-module(docs, style: tidy.styles.default)
-
-
-#pagebreak()
-
-#let docs2 = tidy.parse-module(read("src/fast-shadow-box.typ"), scope: (harbinger:harbinger), name: "fast-shadow-box")
-
-#tidy.show-module(docs2, style: tidy.styles.default)
