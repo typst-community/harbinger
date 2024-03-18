@@ -86,7 +86,7 @@
         let bwidth = bsize.width - 2*radius + shadow-outset.left + shadow-outset.right
         let bheight = bsize.height - 2*radius + shadow-outset.top + shadow-outset.bottom 
 
-        let grad = (shadow-fill, rgb(255,255,255))
+        let grad = (shadow-fill, rgb(255,255,255, 0))
         let corn-grad = gradient.radial.with(..grad, radius: 100%, space:oklch)
         
         place(top+left, dx: -shadow-outset.left, dy: -shadow-outset.top,

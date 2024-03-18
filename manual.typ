@@ -26,5 +26,5 @@
 
 #let docs = tidy.parse-module((read("src/shadow-box.typ"),read("src/fast-shadow-box.typ")).join(), scope: (harbinger:harbinger), name: "functions")
 
-#tidy.show-module(docs, show-outline:false, )
+#tidy.show-module(docs)
 
