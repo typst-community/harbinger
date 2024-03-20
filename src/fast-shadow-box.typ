@@ -20,7 +20,7 @@
   }
 }
 
-/// Shadow Box that uses gradients to create the shadow effect.
+/// Shadow Box that uses gradients to create the shadow effect. Much faster than the regular shadow-box, but has some issues (doesn't look as good, in some cases might have some unwanted artifacts, etc).
 ///
 /// *Example:*
 /// #example(`harbinger.fast-shadow-box(
