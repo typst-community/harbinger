@@ -63,7 +63,7 @@
         named.insert(key, size.at(key) * named.at(key))
       }
     }
-  let boxed-content = box(body, radius: radius, ..named)
+  let boxed-content = box(body, radius: radius, width: width, height:height, ..named)
     
   block(
     radius: radius,
